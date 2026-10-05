@@ -1,14 +1,9 @@
 import react from "react";
-import NavBar from "../components/Navbar";
+
 
 function DashboardPage() {
     return (
-        <>
-        <h2> Dashboard i guess</h2>
-        </>
-        
-        
+        <h1>dashboard</h1>
     )
 }
-
 export default DashboardPage;

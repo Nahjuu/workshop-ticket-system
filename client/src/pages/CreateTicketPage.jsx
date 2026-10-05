@@ -2,9 +2,11 @@ import react from "react";
 
 function CreateTicketPage() {
     return(
-        <h1>
+        <>
+            <h1>
             Create Ticket Page
-        </h1>
+            </h1>
+        </>
     )
 }
 
