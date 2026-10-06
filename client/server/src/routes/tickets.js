@@ -35,6 +35,50 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await pool.query(
+      `
+      SELECT
+        id,
+        ticket_number,
+        customer_name,
+        customer_phone,
+        customer_email,
+        product_name,
+        issue_description,
+        budget,
+        repair_status,
+        repair_comment,
+        status,
+        branch_id,
+        created_by_member_id,
+        created_at,
+        updated_at
+      FROM tickets
+      WHERE id = $1
+      `,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        error: "Ticket no encontrado",
+      });
+    }
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error(error);
+
+    res.status(500).json({
+      error: "Error al obtener el ticket",
+    });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     const {
@@ -88,5 +132,7 @@ router.post("/", async (req, res) => {
     });
   }
 });
+
+
 
 export default router;
